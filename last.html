@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script charset="utf-8">
+  
+class Product {
+    constructor(name, price, quantity, description) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+    }
+}
+
+const arr = [new Product("fdcake", 2, 7, "woooowabc"), new Product("fdapple", 5, 5, "green"),
+    new Product("banafdna", 44, 5, "abcyellow"), new Product("pizzafd", 23, 5, "delicious"),
+    new Product("pafdtato", 2, 44, "bigabc"), new Product("eggfd", 2, 3, "notABCbad"),
+    new Product("fdbread", 90, 6, "good")];
+
+String.prototype.contains = String.prototype.includes;
+String.prototype.starts = String.prototype.startsWith;
+String.prototype.ends = String.prototype.endsWith;
+Number.prototype['>'] = function(value) {
+    return this > value;
+}
+Number.prototype['<'] = function(value) {
+    return this < value;
+}
+Number.prototype['='] = function(value) {
+    return this == value;
+}
+Number.prototype['<='] = function(value) {
+    return this <= value;
+}
+Number.prototype['>='] = function(value) {
+    return this >= value;
+}
+
+function filter(arr, str){
+
+    const strArr = str.split('&');
+
+    const props = strArr.map(item => ({
+        ops: item.split(/(-|>=?|<=?|=)/).filter((value) => value && /[^-]/.test(value))
+    }));
+
+    const newArr = arr.filter(value => {
+    for (let prop of props) {
+        if (!value[prop.ops[0]][prop.ops[1]](prop.ops[2]))
+            return false;
+    }
+    return true;
+    })
+
+    return newArr;
+}
+
+let str1 = "name-contains-fd&price-=2&quantity->5&description-ends-abc";//=В имени содержится fd и цена=2 и кол-во больше 5 и описание заканчивается на abc
+let str2 ="name-starts-fd&quantity=5";//=название начинается на fd, количество равно 5
+
+alert(`Первая строка:\n${JSON.stringify(filter(arr, str1), null, 4)}`);
+alert(`Вторая строка:\n${JSON.stringify(filter(arr, str2), null, 4)}`);
+
+</script>
+</body>
+</html>
+
+
+
+
+

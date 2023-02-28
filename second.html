@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script charset="utf-8">
+
+function add(firstNum, secondNum){
+    return firstNum + secondNum;
+
+}
+
+function subtract(firstNum, secondNum) {
+    return firstNum - secondNum;
+
+}
+
+function multiply(firstNum, secondNum){
+    return firstNum * secondNum;
+
+}
+
+function divide(firstNum, secondNum){
+    return firstNum / secondNum;
+
+}
+
+const firstBigInt = BigInt(prompt('Введите первое число!',''));
+const secondBigInt = BigInt(prompt('Введите второе число!',''));
+
+alert(`Первое число + второе:\n${add(firstBigInt, secondBigInt)}`);
+alert(`Первое число - второе:\n${subtract(firstBigInt, secondBigInt)}`);
+alert(`Первое число * на второе:\n${multiply(firstBigInt, secondBigInt)}`);
+alert(`Первое число / на второе (возможно округление):\n${divide(firstBigInt, secondBigInt)}`);
+</script>
+
+</body>
+</html>
